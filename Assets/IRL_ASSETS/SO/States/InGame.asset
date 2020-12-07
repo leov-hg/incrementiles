@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49389f59e5cba9b4da7546a238d5a59c, type: 3}
+  m_Name: InGame
+  m_EditorClassIdentifier: 
+  stateBehaviours:
+  - id: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: EventStateBehaviour, ns: HomaGames.Internal.GameState.StateBehaviours,
+        asm: HomaGames.GameState}
+      data:
+        _name: 
+        onEnter: {fileID: 11400000, guid: 14cd4b85eb6f7e94eb2e996e248e48a7, type: 2}
+        onUpdate: {fileID: 0}
+        onExit: {fileID: 11400000, guid: 13b0d33871f9b2e488560e17fc838847, type: 2}
+        onFixedUpdate: {fileID: 0}

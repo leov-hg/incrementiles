@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6f219cc7c7df384284ae42fa7fe780b, type: 3}
+  m_Name: GameSettingVariable
+  m_EditorClassIdentifier: 
+  customFrameRate: 0
+  targetFrameRate: 1
+  customFPS: 30
+  debugMode: 0
+  showFPS: 1
+  displayDollarSymbol: 0
