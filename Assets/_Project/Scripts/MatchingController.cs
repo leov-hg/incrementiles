@@ -60,13 +60,13 @@ public class MatchingController : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonUp(0)) //Todo : validation de l'action. S'il y a plus d'une tile dans la liste, alors Expand()
+        if (Input.GetMouseButtonUp(0))
         {
             if (_targetedTiles.Count > 1)
             {
                 foreach (Tile tile in _targetedTiles)
                 {
-                    tile.Hide();
+                    gridManager.gridManager.Expand(tile);
                 }
             }
             else
