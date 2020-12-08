@@ -62,10 +62,21 @@ public class MatchingController : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0)) //Todo : validation de l'action. S'il y a plus d'une tile dans la liste, alors Expand()
         {
-            foreach (Tile tile in _targetedTiles)
+            if (_targetedTiles.Count > 1)
             {
-                tile.Deselect();
+                foreach (Tile tile in _targetedTiles)
+                {
+                    tile.Hide();
+                }
             }
+            else
+            {
+                foreach (Tile tile in _targetedTiles)
+                {
+                    tile.Deselect();
+                }
+            }
+
             _targetedTiles = new List<Tile>();
         }
     }
@@ -77,7 +88,7 @@ public class MatchingController : MonoBehaviour
 
         foreach (Tile tile in _targetedTiles)
         {
-            if (gridManager.gridManager.AreNeighbors(targetedTile, tile))
+            if (gridManager.gridManager.AreNeighbors(tile, targetedTile))
             {
                 res = true;
             }
