@@ -45,7 +45,7 @@ public class MatchingController : MonoBehaviour
             {
                 Tile hitTile = _raycastHit.transform.GetComponent<Tile>();
                 
-                if (hitTile != null && hitTile.type == _startTile.type && !_targetedTiles.Contains(hitTile))
+                if (hitTile != null && hitTile.type == _startTile.type && !_targetedTiles.Contains(hitTile) && isInDistance(hitTile.gameObject))
                 {
                     _targetedTiles.Add(hitTile);
                 }
@@ -56,5 +56,20 @@ public class MatchingController : MonoBehaviour
         {
             _targetedTiles = new List<Tile>();
         }
+    }
+
+    private bool isInDistance(GameObject hitObject)
+    {
+        bool res = false;
+
+        foreach (Tile tile in _targetedTiles)
+        {
+            if(Vector3.Distance(hitObject.transform.position, tile.transform.position) <= 2)
+            {
+                res = true;
+            }
+        }
+
+        return res;
     }
 }
