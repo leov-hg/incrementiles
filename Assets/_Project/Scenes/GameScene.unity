@@ -942,6 +942,7 @@ MonoBehaviour:
   tileLayer:
     serializedVersion: 2
     m_Bits: 256
+  neighboringDistance: 2.5
   _targetedTiles: []
 --- !u!1 &708538349
 GameObject:
@@ -1913,7 +1914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d82af349e4db24f8ec0fa20c0bee21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
 --- !u!65 &1195882330
 BoxCollider:
   m_ObjectHideFlags: 0
