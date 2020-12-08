@@ -67,6 +67,7 @@ public class MatchingController : MonoBehaviour
                 foreach (Tile tile in _targetedTiles)
                 {
                     gridManager.gridManager.Expand(tile);
+                    tile.Deselect();
                 }
             }
             else
