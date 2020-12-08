@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class MatchingController : MonoBehaviour
 {
+    public SO_GridManager gridManager;
+    
     public LayerMask tileLayer;
     public float neighboringDistance;
     
@@ -28,7 +31,7 @@ public class MatchingController : MonoBehaviour
             {
                 Tile hitTile = _raycastHit.transform.GetComponent<Tile>();
                 
-                if (hitTile != null)
+                if (hitTile != null && hitTile.State == Tile.TileState.Discovered)
                 {
                     _startTile = hitTile;
                     
@@ -49,7 +52,7 @@ public class MatchingController : MonoBehaviour
             {
                 Tile hitTile = _raycastHit.transform.GetComponent<Tile>();
 
-                if (hitTile != null && hitTile.type == _startTile.type && !_targetedTiles.Contains(hitTile) && isInDistance(hitTile.gameObject))
+                if (hitTile != null && hitTile.Type == _startTile.Type && !_targetedTiles.Contains(hitTile) && IsNeighbor(hitTile) && hitTile.State == Tile.TileState.Discovered)
                 {
                     _targetedTiles.Add(hitTile);
                     hitTile.Select();
@@ -66,20 +69,20 @@ public class MatchingController : MonoBehaviour
             _targetedTiles = new List<Tile>();
         }
     }
-
-    private bool isInDistance(GameObject hitObject)
+    
+    
+    private bool IsNeighbor(Tile targetedTile)
     {
         bool res = false;
 
         foreach (Tile tile in _targetedTiles)
         {
-            print(Vector3.Distance(hitObject.transform.position, tile.transform.position));
-            if(Vector3.Distance(hitObject.transform.position, tile.transform.position) <= neighboringDistance)
+            if (gridManager.gridManager.AreNeighbors(targetedTile, tile))
             {
                 res = true;
             }
-        } 
-
+        }
+            
         return res;
     }
 }
