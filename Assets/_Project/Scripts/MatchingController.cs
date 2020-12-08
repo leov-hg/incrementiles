@@ -52,7 +52,7 @@ public class MatchingController : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonUp(0)) //Todo : validation de l'action. S'il y a plus d'une tile dans la liste, alors Expand()
+        if (Input.GetMouseButtonUp(0)) //Todo : validation de l'action. S'il y a plus d'une tile dans la liste, alors Expand()
         {
             _targetedTiles = new List<Tile>();
         }
