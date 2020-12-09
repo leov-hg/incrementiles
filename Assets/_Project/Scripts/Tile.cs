@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using DG.Tweening;
+using DG.Tweening.Plugins.Options;
 using MyBox;
 using UnityEditor;
 using UnityEngine;
@@ -14,14 +15,17 @@ public class Tile : MonoBehaviour
 {
     [SerializeField] private TileType tileType;
     [SerializeField] private TileState tileState;
-    [SerializeField] private Color baseHiddenColor;
-    [SerializeField] private Color baseUnselectedColor;
-    [SerializeField] private Color baseSelectedColor;
-    [SerializeField] private GameObject cubeModel;
-    [SerializeField] private GameObject circleModel;
-    [SerializeField] private GameObject triangleModel;
+
+    [SerializeField] private GameObject buildingModel;
+    [SerializeField] private GameObject houseModel;
+    [SerializeField] private GameObject parkModel;
+
+    private GameObject _currentDisplayedModel;
+    private MeshRenderer _currentDisplayModelMesh;
 
     private MeshRenderer _tileBaseMeshRenderer;
+
+    private DG.Tweening.Core.TweenerCore<float, float, FloatOptions> selectionTween;
 
     public TileType Type
     {
@@ -43,8 +47,7 @@ public class Tile : MonoBehaviour
     private void Awake()
     {
         _tileBaseMeshRenderer = GetComponent<MeshRenderer>();
-        _tileBaseMeshRenderer.material.color = baseHiddenColor;
-        
+
         SetRandomType();
     }
 
@@ -56,14 +59,14 @@ public class Tile : MonoBehaviour
         //Disable the model based on the current Type
         switch (Type)
         {
-            case TileType.Circle :
-                circleModel.SetActive(false);
+            case TileType.Building :
+                buildingModel.SetActive(false);
                 break;
-            case TileType.Square :
-                cubeModel.SetActive(false);
+            case TileType.House :
+                houseModel.SetActive(false);
                 break;
-            case TileType.Triangle :
-                triangleModel.SetActive(false);
+            case TileType.Park :
+                parkModel.SetActive(false);
                 break;
         }
         
@@ -71,14 +74,20 @@ public class Tile : MonoBehaviour
 
         switch (type)
         {
-            case TileType.Circle :
-                circleModel.SetActive(true);
+            case TileType.Building :
+                buildingModel.SetActive(true);
+                _currentDisplayedModel = buildingModel;
+                _currentDisplayModelMesh = buildingModel.GetComponent<MeshRenderer>();
                 break;
-            case TileType.Square :
-                cubeModel.SetActive(true);
+            case TileType.House :
+                houseModel.SetActive(true);
+                _currentDisplayedModel = houseModel;
+                _currentDisplayModelMesh = houseModel.GetComponent<MeshRenderer>();
                 break;
-            case TileType.Triangle :
-                triangleModel.SetActive(true);
+            case TileType.Park :
+                parkModel.SetActive(true);
+                _currentDisplayedModel = parkModel;
+                _currentDisplayModelMesh = parkModel.GetComponent<MeshRenderer>();
                 break;
         }
     }
@@ -91,12 +100,13 @@ public class Tile : MonoBehaviour
     
     public void Select()
     {
-        _tileBaseMeshRenderer.material.color = baseSelectedColor;
+       selectionTween = DOTween.To(()=> _currentDisplayModelMesh.materials[1].GetFloat("_OutlineWidth"), x=> _currentDisplayModelMesh.materials[1].SetFloat("_OutlineWidth", x), 0.2f, 0.5f).SetLoops(-1, LoopType.Yoyo);
     }
 
     public void Deselect()
     {
-        _tileBaseMeshRenderer.material.color = baseUnselectedColor;
+        _currentDisplayModelMesh.materials[1].SetFloat("_OutlineWidth", 0);
+        selectionTween.Kill();
     }
 
     public void Validate()
@@ -109,7 +119,6 @@ public class Tile : MonoBehaviour
     {
         State = TileState.Hidden;
         transform.DORotate(new Vector3(0, 0, 0), 0.5f);
-        _tileBaseMeshRenderer.material.color = baseHiddenColor;
     }
 
     [ButtonMethod]
@@ -117,18 +126,20 @@ public class Tile : MonoBehaviour
     {
         State = TileState.Discovered;
         transform.DORotate(new Vector3(180, 0, 0), 0.5f);
-        _tileBaseMeshRenderer.material.color = baseUnselectedColor;
     }
-    
-    
-    
+
+
+    public void SetColor(Color color)
+    {
+        _tileBaseMeshRenderer.material.color = color;
+    }
     
     
     public enum TileType
     {
-        Circle,
-        Square,
-        Triangle
+        Building,
+        House,
+        Park
     }
     
     public enum TileState

@@ -69,4 +69,29 @@ public class Grid : MonoBehaviour
     {
         return _tilesList.Contains(tile);
     }
+
+    public void Expand(Tile tileToExpand)
+    {
+        int tileIndexInList = TilesList.IndexOf(tileToExpand);
+        Vector2Int tilePos = new Vector2Int(tileIndexInList % width, Mathf.FloorToInt(tileIndexInList / width));
+        
+        if (tilePos.x - 1 >= 0 && tilePos.y - 1 >= 0 && TilesArray[tilePos.x - 1, tilePos.y - 1].State == Tile.TileState.Hidden)
+            TilesArray[tilePos.x - 1, tilePos.y - 1].Discover();
+        if (tilePos.y - 1 >= 0 && TilesArray[tilePos.x, tilePos.y - 1].State == Tile.TileState.Hidden)
+            TilesArray[tilePos.x , tilePos.y - 1].Discover();
+        if (tilePos.x + 1 <= width - 1 && tilePos.y - 1 >= 0 && TilesArray[tilePos.x + 1, tilePos.y - 1].State == Tile.TileState.Hidden)
+            TilesArray[tilePos.x + 1, tilePos.y - 1].Discover();
+    
+        if (tilePos.x - 1 >= 0 && TilesArray[tilePos.x - 1, tilePos.y].State == Tile.TileState.Hidden)
+            TilesArray[tilePos.x - 1, tilePos.y].Discover();
+        if (tilePos.x + 1 <= width - 1 && TilesArray[tilePos.x + 1, tilePos.y].State == Tile.TileState.Hidden)
+            TilesArray[tilePos.x + 1, tilePos.y].Discover();
+    
+        if (tilePos.x - 1 >= 0 && tilePos.y + 1 <= height - 1 && TilesArray[tilePos.x - 1, tilePos.y + 1].State == Tile.TileState.Hidden)
+            TilesArray[tilePos.x - 1, tilePos.y + 1].Discover();
+        if (tilePos.y + 1 <= height - 1 && TilesArray[tilePos.x, tilePos.y + 1].State == Tile.TileState.Hidden)
+            TilesArray[tilePos.x, tilePos.y + 1].Discover();
+        if (tilePos.x + 1 <= width - 1 && tilePos.y + 1 <= height - 1 && TilesArray[tilePos.x + 1, tilePos.y + 1].State == Tile.TileState.Hidden)
+            TilesArray[tilePos.x + 1, tilePos.y + 1].Discover();
+    }
 }
