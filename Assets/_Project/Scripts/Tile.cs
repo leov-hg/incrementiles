@@ -26,7 +26,10 @@ public class Tile : MonoBehaviour
 
     private MeshRenderer _tileBaseMeshRenderer;
 
-    private Tween selectionTween;
+    private Tween selectionOutlineTween;
+    private Tween selectionScaleXTween;
+    private Tween selectionScaleYTween;
+    private Tween selectionScaleZTween;
 
     public TileType Type
     {
@@ -101,13 +104,25 @@ public class Tile : MonoBehaviour
     
     public void Select()
     {
-       selectionTween = DOTween.To(()=> _currentDisplayModelMesh.materials[1].GetFloat("_OutlineWidth"), x=> _currentDisplayModelMesh.materials[1].SetFloat("_OutlineWidth", x), 0.2f, 0.5f).SetLoops(-1, LoopType.Yoyo);
+       selectionOutlineTween = DOTween.To(()=> _currentDisplayModelMesh.materials[1].GetFloat("_OutlineWidth"), x=> _currentDisplayModelMesh.materials[1].SetFloat("_OutlineWidth", x), 0.2f, 0.5f).SetLoops(-1, LoopType.Yoyo);
+       //selectionScaleXTween = transform.DOScaleX(0.7f, 0.5f).SetLoops(-1, LoopType.Yoyo);
+       //selectionScaleYTween = transform.DOScaleY(0.12f, 0.5f).SetLoops(-1, LoopType.Yoyo);
+       //selectionScaleZTween = transform.DOScaleZ(0.7f, 0.5f).SetLoops(-1, LoopType.Yoyo);
+       
+       selectionScaleXTween = _currentDisplayedModel.transform.DOScaleX(0.6f, 0.5f).SetLoops(-1, LoopType.Yoyo);
+       selectionScaleYTween = _currentDisplayedModel.transform.DOScaleY(5.2f, 0.5f).SetLoops(-1, LoopType.Yoyo);
+       selectionScaleZTween = _currentDisplayedModel.transform.DOScaleZ(0.6f, 0.5f).SetLoops(-1, LoopType.Yoyo);
     }
 
     public void Deselect()
     {
         _currentDisplayModelMesh.materials[1].SetFloat("_OutlineWidth", 0);
-        selectionTween.Kill();
+        _currentDisplayedModel.transform.localScale = new Vector3(0.5f, 5, 0.5f);
+        
+        selectionOutlineTween.Kill();
+        selectionScaleXTween.Kill();
+        selectionScaleYTween.Kill();
+        selectionScaleZTween.Kill();
     }
 
     public void Validate()
@@ -126,8 +141,8 @@ public class Tile : MonoBehaviour
     public void Discover()
     {
         State = TileState.Discovered;
-        transform.DORotate(new Vector3(180, 0, 0), 0.5f).OnComplete(TriggerSpawnEffect);
-        _currentDisplayedModel.transform.DOScale(new Vector3(0.5f, 5, 0.5f), 0.5f).SetEase(Ease.OutElastic).SetDelay(0.5f);
+        transform.DORotate(new Vector3(180, 0, 0), 0.25f).OnComplete(TriggerSpawnEffect);
+        _currentDisplayedModel.transform.DOScale(new Vector3(0.5f, 5, 0.5f), 0.25f).SetEase(Ease.OutElastic).SetDelay(0.25f);
     }
 
     private void TriggerSpawnEffect()

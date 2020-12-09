@@ -23,7 +23,7 @@ public class GridManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(RevealLineCoroutine(0));
+        RevealLineCoroutine(0);
         InitGridsColor();
     }
 
@@ -62,14 +62,13 @@ public class GridManager : MonoBehaviour
         StartCoroutine(RevealCoroutine());
     }*/
 
-    private IEnumerator RevealLineCoroutine(int lineIndex)
+    private void RevealLineCoroutine(int lineIndex)
     {
         foreach (Grid grid in _grids)
         {
             for (int i = 0; i < grid.width; i++)
             {
                 grid.TilesArray[i,lineIndex].Discover();
-                yield return new WaitForSeconds(0.02f);
             }
         }
 
