@@ -19,13 +19,14 @@ public class Tile : MonoBehaviour
     [SerializeField] private GameObject buildingModel;
     [SerializeField] private GameObject houseModel;
     [SerializeField] private GameObject parkModel;
+    [SerializeField] private GameObject spawnParticles;
 
     private GameObject _currentDisplayedModel;
     private MeshRenderer _currentDisplayModelMesh;
 
     private MeshRenderer _tileBaseMeshRenderer;
 
-    private DG.Tweening.Core.TweenerCore<float, float, FloatOptions> selectionTween;
+    private Tween selectionTween;
 
     public TileType Type
     {
@@ -125,7 +126,13 @@ public class Tile : MonoBehaviour
     public void Discover()
     {
         State = TileState.Discovered;
-        transform.DORotate(new Vector3(180, 0, 0), 0.5f);
+        transform.DORotate(new Vector3(180, 0, 0), 0.5f).OnComplete(TriggerSpawnEffect);
+        _currentDisplayedModel.transform.DOScale(new Vector3(0.5f, 5, 0.5f), 0.5f).SetEase(Ease.OutElastic).SetDelay(0.5f);
+    }
+
+    private void TriggerSpawnEffect()
+    {
+        spawnParticles.SetActive(true);
     }
 
 
