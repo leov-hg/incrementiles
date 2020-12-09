@@ -83,7 +83,7 @@ QualitySettings:
     pixelLightCount: 1
     shadows: 1
     shadowResolution: 1
-    shadowProjection: 1
+    shadowProjection: 0
     shadowCascades: 1
     shadowDistance: 100
     shadowNearPlaneOffset: 3
@@ -230,7 +230,7 @@ QualitySettings:
     PS4: 5
     PSP2: 2
     Stadia: 5
-    Standalone: 5
+    Standalone: 2
     WebGL: 3
     Windows Store Apps: 5
     XboxOne: 5
