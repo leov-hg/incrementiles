@@ -1970,6 +1970,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce9463c70c8781f459c606503739b733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lerpValue: {fileID: 11400000, guid: 5e81f4573d531aa4eaa7d5d31d99df5c, type: 2}
   gridManager: {fileID: 11400000, guid: 0bd83ff23f6c4e24dbd17b05693c00d6, type: 2}
   tileLayer:
     serializedVersion: 2

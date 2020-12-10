@@ -2,10 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using DG.Tweening;
+using HomaGames.Internal.DataBank.BasicTypes;
 using UnityEngine;
 
 public class MatchingController : MonoBehaviour
 {
+    public FloatData lerpValue;
+    
     public SO_GridManager gridManager;
     
     public LayerMask tileLayer;
@@ -23,6 +27,8 @@ public class MatchingController : MonoBehaviour
     private void Awake()
     {
         _mainCamera = Camera.main;;
+        lerpValue.Value = 0;
+        DOTween.To(() =>lerpValue.Value, x=>lerpValue.Value = x, 1, 0.5f).SetLoops(-1, LoopType.Yoyo);
     }
 
     private void Update()

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using DG.Tweening;
 using DG.Tweening.Plugins.Options;
+using HomaGames.Internal.DataBank.BasicTypes;
 using MyBox;
 using UnityEditor;
 using UnityEngine;
@@ -13,8 +14,14 @@ using Random = UnityEngine.Random;
 
 public class Tile : MonoBehaviour
 {
+    [SerializeField] private FloatData lerpValue;
+    
     [SerializeField] private TileType tileType;
     [SerializeField] private TileState tileState;
+    
+    [SerializeField] private Vector3 startScale;
+    [SerializeField] private Vector2 minMaxOutlineScale;
+    [SerializeField] private float scaleFactor;
 
     [SerializeField] private GameObject buildingModel;
     [SerializeField] private GameObject houseModel;
@@ -29,11 +36,9 @@ public class Tile : MonoBehaviour
 
     private Color _startColor;
 
-    private Tween selectionOutlineTween;
-    private Tween selectionScaleXTween;
-    private Tween selectionScaleYTween;
-    private Tween selectionScaleZTween;
-
+    private bool _isSelected;
+    private bool _isPrevisualised;
+    
     public TileType Type
     {
         get => tileType;
@@ -122,27 +127,43 @@ public class Tile : MonoBehaviour
     
     public void Select()
     {
-       selectionOutlineTween = DOTween.To(()=> _currentDisplayModelMesh.materials[1].GetFloat("_OutlineWidth"), x=> _currentDisplayModelMesh.materials[1].SetFloat("_OutlineWidth", x), 0.1f, 0.5f).SetLoops(-1, LoopType.Yoyo);
-
-       selectionScaleXTween = _currentDisplayedModel.transform.DOScaleX(0.55f, 0.5f).SetLoops(-1, LoopType.Yoyo);
-       selectionScaleYTween = _currentDisplayedModel.transform.DOScaleY(5.1f, 0.5f).SetLoops(-1, LoopType.Yoyo);
-       selectionScaleZTween = _currentDisplayedModel.transform.DOScaleZ(0.55f, 0.5f).SetLoops(-1, LoopType.Yoyo);
+        _isSelected = true;
     }
 
     public void Deselect()
     {
+        _isSelected = false;
+
         _currentDisplayModelMesh.materials[1].SetFloat("_OutlineWidth", 0);
-        _currentDisplayedModel.transform.localScale = new Vector3(0.5f, 5, 0.5f);
-        
-        selectionOutlineTween.Kill();
-        selectionScaleXTween.Kill();
-        selectionScaleYTween.Kill();
-        selectionScaleZTween.Kill();
+        _currentDisplayedModel.transform.localScale = startScale;
+    }
+    
+    public void StartPrevisualisation()
+    {
+        _isPrevisualised = true;
     }
 
-    public void SetVisualisation(float lerpValue)
+    public void StopPrevisualisation()
     {
-        _tileBaseMeshRenderer.material.color = Color.Lerp(_startColor, previsualisationColor, lerpValue);
+        _isPrevisualised = false;
+
+        _tileBaseMeshRenderer.material.color = _startColor;
+    }
+
+    private void Update()
+    {
+        if (_isSelected)
+        {
+            _currentDisplayModelMesh.materials[1].SetFloat("_OutlineWidth", Mathf.Lerp(minMaxOutlineScale.x, minMaxOutlineScale.y, lerpValue.Value));
+
+            Vector3 newScale = Vector3.Lerp(startScale, startScale * ( 1 + scaleFactor), lerpValue.Value);
+            _currentDisplayedModel.transform.localScale = newScale;
+        }
+
+        if (_isPrevisualised)
+        {
+            _tileBaseMeshRenderer.material.color = Color.Lerp(_startColor, previsualisationColor, lerpValue.Value);
+        }
     }
 
     public void Validate()

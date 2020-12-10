@@ -15,7 +15,6 @@ public class Grid : MonoBehaviour
     private Tile[,] _tilesArray;
 
     private List<Tile> _newExpandedTiles = new List<Tile>();
-    private Tween expandPrevisualisationTween;
     private float colorLerpValue;
 
     public List<Tile> TilesList
@@ -49,11 +48,6 @@ public class Grid : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        expandPrevisualisationTween = DOTween.To(() =>colorLerpValue, x=>colorLerpValue = x, 1, 0.5f).SetLoops(-1, LoopType.Yoyo);
-    }
-
 
     public bool AreNeighbors(Tile tile1, Tile tile2)
     {
@@ -83,21 +77,19 @@ public class Grid : MonoBehaviour
         return _tilesList.Contains(tile);
     }
 
-    private void Update()
-    {
-        foreach (Tile tile in _newExpandedTiles)
-        {
-            tile.SetVisualisation(colorLerpValue);
-        }
-    }
-
     public void StopPrevisualisation()
     {
         foreach (Tile tile in _newExpandedTiles)
         {
-            tile.SetVisualisation(0);
+            tile.StopPrevisualisation();
         }
         _newExpandedTiles = new List<Tile>();
+    }
+
+    public void StartPrevisualisation()
+    {
+        foreach (Tile tile in _newExpandedTiles)
+            tile.StartPrevisualisation();
     }
 
     public void Expand(List<Tile> tilesToExpand, int comboAmount)
@@ -108,7 +100,7 @@ public class Grid : MonoBehaviour
             Vector2Int tilePos = new Vector2Int(tileIndexInList % width, Mathf.FloorToInt(tileIndexInList / width));
 
             int expandAmount = Mathf.Clamp(Mathf.FloorToInt(comboAmount / 2), 1, 9999);
-            print(expandAmount);
+
             for (int i = 1; i <= expandAmount; i++)
             {
                 //if (tilePos.x - 1 >= 0 && tilePos.y - 1 >= 0 && TilesArray[tilePos.x - 1, tilePos.y - 1].State == Tile.TileState.Hidden)
@@ -131,6 +123,7 @@ public class Grid : MonoBehaviour
                 //TilesArray[tilePos.x + 1, tilePos.y + 1].Discover();
             }
         }
+        StartPrevisualisation();
     }
 
     public void ValidateExpand()
@@ -138,7 +131,6 @@ public class Grid : MonoBehaviour
         foreach (Tile tile in _newExpandedTiles)
         {
             tile.Discover();
-            tile.SetVisualisation(0);
         }
         StopPrevisualisation();
     }

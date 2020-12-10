@@ -204,8 +204,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d82af349e4db24f8ec0fa20c0bee21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lerpValue: {fileID: 11400000, guid: 5e81f4573d531aa4eaa7d5d31d99df5c, type: 2}
   tileType: 0
   tileState: 0
+  startScale: {x: 0.5, y: 5, z: 0.5}
+  minMaxOutlineScale: {x: 0, y: 0.1}
+  scaleFactor: 0.1
   buildingModel: {fileID: 8026390470805374627}
   houseModel: {fileID: 8026390471147715189}
   parkModel: {fileID: 8026390470659728566}
