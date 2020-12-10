@@ -84,7 +84,7 @@ public class GridManager : MonoBehaviour
     }*/
 
 
-    public void Expand(Tile tileToExpand)
+    public void Expand(Tile tileToExpand, int comboAmount)
     {
         Grid localGrid = null;
 
@@ -92,7 +92,7 @@ public class GridManager : MonoBehaviour
         {
             if (grid.Contains(tileToExpand))
             {
-                grid.Expand(tileToExpand);
+                grid.Expand(tileToExpand, comboAmount);
             }
         }
     }

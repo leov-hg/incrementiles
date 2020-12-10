@@ -19,6 +19,7 @@ public class Tile : MonoBehaviour
     [SerializeField] private GameObject buildingModel;
     [SerializeField] private GameObject houseModel;
     [SerializeField] private GameObject parkModel;
+    [SerializeField] private GameObject roadModel;
     [SerializeField] private GameObject spawnParticles;
 
     private GameObject _currentDisplayedModel;
@@ -52,7 +53,14 @@ public class Tile : MonoBehaviour
     {
         _tileBaseMeshRenderer = GetComponent<MeshRenderer>();
 
-        SetRandomType();
+        if (Type == TileType.Road)
+        {
+            SetType(TileType.Road);
+        }
+        else
+        {
+            SetRandomType();
+        }
     }
 
 
@@ -71,6 +79,9 @@ public class Tile : MonoBehaviour
                 break;
             case TileType.Park :
                 parkModel.SetActive(false);
+                break;
+            case TileType.Road :
+                roadModel.SetActive(false);
                 break;
         }
         
@@ -93,25 +104,27 @@ public class Tile : MonoBehaviour
                 _currentDisplayedModel = parkModel;
                 _currentDisplayModelMesh = parkModel.GetComponent<MeshRenderer>();
                 break;
+            case TileType.Road :
+                roadModel.SetActive(true);
+                _currentDisplayedModel = roadModel;
+                _currentDisplayModelMesh = roadModel.GetComponent<MeshRenderer>();
+                break;
         }
     }
 
     [ButtonMethod]
     private void SetRandomType()
     {
-        SetType((TileType) Random.Range(0, Enum.GetNames(typeof(TileType)).Length));
+        SetType((TileType) Random.Range(0, Enum.GetNames(typeof(TileType)).Length - 1));
     }
     
     public void Select()
     {
-       selectionOutlineTween = DOTween.To(()=> _currentDisplayModelMesh.materials[1].GetFloat("_OutlineWidth"), x=> _currentDisplayModelMesh.materials[1].SetFloat("_OutlineWidth", x), 0.2f, 0.5f).SetLoops(-1, LoopType.Yoyo);
-       //selectionScaleXTween = transform.DOScaleX(0.7f, 0.5f).SetLoops(-1, LoopType.Yoyo);
-       //selectionScaleYTween = transform.DOScaleY(0.12f, 0.5f).SetLoops(-1, LoopType.Yoyo);
-       //selectionScaleZTween = transform.DOScaleZ(0.7f, 0.5f).SetLoops(-1, LoopType.Yoyo);
-       
-       selectionScaleXTween = _currentDisplayedModel.transform.DOScaleX(0.6f, 0.5f).SetLoops(-1, LoopType.Yoyo);
-       selectionScaleYTween = _currentDisplayedModel.transform.DOScaleY(5.2f, 0.5f).SetLoops(-1, LoopType.Yoyo);
-       selectionScaleZTween = _currentDisplayedModel.transform.DOScaleZ(0.6f, 0.5f).SetLoops(-1, LoopType.Yoyo);
+       selectionOutlineTween = DOTween.To(()=> _currentDisplayModelMesh.materials[1].GetFloat("_OutlineWidth"), x=> _currentDisplayModelMesh.materials[1].SetFloat("_OutlineWidth", x), 0.1f, 0.5f).SetLoops(-1, LoopType.Yoyo);
+
+       selectionScaleXTween = _currentDisplayedModel.transform.DOScaleX(0.55f, 0.5f).SetLoops(-1, LoopType.Yoyo);
+       selectionScaleYTween = _currentDisplayedModel.transform.DOScaleY(5.1f, 0.5f).SetLoops(-1, LoopType.Yoyo);
+       selectionScaleZTween = _currentDisplayedModel.transform.DOScaleZ(0.55f, 0.5f).SetLoops(-1, LoopType.Yoyo);
     }
 
     public void Deselect()
@@ -141,8 +154,8 @@ public class Tile : MonoBehaviour
     public void Discover()
     {
         State = TileState.Discovered;
-        transform.DORotate(new Vector3(180, 0, 0), 0.25f).OnComplete(TriggerSpawnEffect);
-        _currentDisplayedModel.transform.DOScale(new Vector3(0.5f, 5, 0.5f), 0.25f).SetEase(Ease.OutElastic).SetDelay(0.25f);
+        transform.DORotate(new Vector3(180, 0, 0), 0.5f).OnComplete(TriggerSpawnEffect);
+        _currentDisplayedModel.transform.DOScale(new Vector3(0.5f, 5, 0.5f), 0.5f).SetEase(Ease.OutElastic).SetDelay(0.25f);
     }
 
     private void TriggerSpawnEffect()
@@ -161,7 +174,8 @@ public class Tile : MonoBehaviour
     {
         Building,
         House,
-        Park
+        Park,
+        Road
     }
     
     public enum TileState

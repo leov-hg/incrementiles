@@ -18,6 +18,8 @@ public class MatchingController : MonoBehaviour
 
     private Camera _mainCamera;
 
+    private int _comboCount;
+
     private void Awake()
     {
         _mainCamera = Camera.main;;
@@ -37,6 +39,7 @@ public class MatchingController : MonoBehaviour
                     
                     _targetedTiles.Add(_startTile);
                     _startTile.Select();
+                    _comboCount++;
                 }
             }
             else
@@ -56,6 +59,7 @@ public class MatchingController : MonoBehaviour
                 {
                     _targetedTiles.Add(hitTile);
                     hitTile.Select();
+                    _comboCount++;
                 }
             }
         }
@@ -66,7 +70,8 @@ public class MatchingController : MonoBehaviour
             {
                 foreach (Tile tile in _targetedTiles)
                 {
-                    gridManager.gridManager.Expand(tile);
+                    print(_comboCount);
+                    gridManager.gridManager.Expand(tile, _comboCount);
                     tile.Deselect();
                 }
             }
@@ -79,6 +84,7 @@ public class MatchingController : MonoBehaviour
             }
 
             _targetedTiles = new List<Tile>();
+            _comboCount = 0;
         }
     }
     
