@@ -66,7 +66,8 @@ public class Tile : MonoBehaviour
         }
         else
         {
-            SetRandomType();
+            //SetRandomType();
+            SetType(Type);
         }
     }
 
