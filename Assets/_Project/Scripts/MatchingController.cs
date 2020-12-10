@@ -33,13 +33,14 @@ public class MatchingController : MonoBehaviour
             {
                 Tile hitTile = _raycastHit.transform.GetComponent<Tile>();
                 
-                if (hitTile != null && hitTile.State == Tile.TileState.Discovered)
+                if (hitTile != null && hitTile.State == Tile.TileState.Discovered && hitTile.Type != Tile.TileType.Road)
                 {
                     _startTile = hitTile;
                     
                     _targetedTiles.Add(_startTile);
                     _startTile.Select();
                     _comboCount++;
+                    gridManager.gridManager.Expand(_targetedTiles, 2);
                 }
             }
             else
@@ -55,11 +56,12 @@ public class MatchingController : MonoBehaviour
             {
                 Tile hitTile = _raycastHit.transform.GetComponent<Tile>();
 
-                if (hitTile != null && hitTile.Type == _startTile.Type && !_targetedTiles.Contains(hitTile) && IsNeighbor(hitTile) && hitTile.State == Tile.TileState.Discovered)
+                if (hitTile != null && hitTile.Type == _startTile.Type && hitTile.Type != Tile.TileType.Road && !_targetedTiles.Contains(hitTile) && IsNeighbor(hitTile) && hitTile.State == Tile.TileState.Discovered)
                 {
                     _targetedTiles.Add(hitTile);
                     hitTile.Select();
                     _comboCount++;
+                    gridManager.gridManager.Expand(_targetedTiles, _comboCount);
                 }
             }
         }
@@ -68,10 +70,9 @@ public class MatchingController : MonoBehaviour
         {
             if (_targetedTiles.Count > 1)
             {
+                gridManager.gridManager.ValidateExpand();
                 foreach (Tile tile in _targetedTiles)
                 {
-                    print(_comboCount);
-                    gridManager.gridManager.Expand(tile, _comboCount);
                     tile.Deselect();
                 }
             }
@@ -81,6 +82,7 @@ public class MatchingController : MonoBehaviour
                 {
                     tile.Deselect();
                 }
+                gridManager.gridManager.StopPrevisualisation();
             }
 
             _targetedTiles = new List<Tile>();

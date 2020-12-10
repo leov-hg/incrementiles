@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 
 public class Grid : MonoBehaviour
@@ -12,6 +13,10 @@ public class Grid : MonoBehaviour
 
     [SerializeField] private List<Tile> _tilesList;
     private Tile[,] _tilesArray;
+
+    private List<Tile> _newExpandedTiles = new List<Tile>();
+    private Tween expandPrevisualisationTween;
+    private float colorLerpValue;
 
     public List<Tile> TilesList
     {
@@ -43,8 +48,13 @@ public class Grid : MonoBehaviour
             }
         }
     }
-    
-    
+
+    private void Start()
+    {
+        expandPrevisualisationTween = DOTween.To(() =>colorLerpValue, x=>colorLerpValue = x, 1, 0.5f).SetLoops(-1, LoopType.Yoyo);
+    }
+
+
     public bool AreNeighbors(Tile tile1, Tile tile2)
     {
         if (ContainsBoth(tile1, tile2))
@@ -73,33 +83,63 @@ public class Grid : MonoBehaviour
         return _tilesList.Contains(tile);
     }
 
-    public void Expand(Tile tileToExpand, int comboAmount)
+    private void Update()
     {
-        int tileIndexInList = TilesList.IndexOf(tileToExpand);
-        Vector2Int tilePos = new Vector2Int(tileIndexInList % width, Mathf.FloorToInt(tileIndexInList / width));
-
-        int expandAmount = Mathf.FloorToInt(comboAmount / 2);
-
-        for (int i = 1; i <= expandAmount; i++)
+        foreach (Tile tile in _newExpandedTiles)
         {
-            //if (tilePos.x - 1 >= 0 && tilePos.y - 1 >= 0 && TilesArray[tilePos.x - 1, tilePos.y - 1].State == Tile.TileState.Hidden)
-            //TilesArray[tilePos.x - 1, tilePos.y - 1].Discover();
-            if (tilePos.y - i >= 0 && TilesArray[tilePos.x, tilePos.y - i].State == Tile.TileState.Hidden)
-                TilesArray[tilePos.x , tilePos.y - i].Discover();
-            //if (tilePos.x + 1 <= width - 1 && tilePos.y - 1 >= 0 && TilesArray[tilePos.x + 1, tilePos.y - 1].State == Tile.TileState.Hidden)
-            //TilesArray[tilePos.x + 1, tilePos.y - 1].Discover();
-    
-            if (tilePos.x - i >= 0 && TilesArray[tilePos.x - i, tilePos.y].State == Tile.TileState.Hidden)
-                TilesArray[tilePos.x - i, tilePos.y].Discover();
-            if (tilePos.x + i <= width - 1 && TilesArray[tilePos.x + i, tilePos.y].State == Tile.TileState.Hidden)
-                TilesArray[tilePos.x + i, tilePos.y].Discover();
-    
-            //if (tilePos.x - 1 >= 0 && tilePos.y + 1 <= height - 1 && TilesArray[tilePos.x - 1, tilePos.y + 1].State == Tile.TileState.Hidden)
-            //TilesArray[tilePos.x - 1, tilePos.y + 1].Discover();
-            if (tilePos.y + i <= _height - 1 && TilesArray[tilePos.x, tilePos.y + i].State == Tile.TileState.Hidden)
-                TilesArray[tilePos.x, tilePos.y + i].Discover();
-            //if (tilePos.x + 1 <= width - 1 && tilePos.y + 1 <= height - 1 && TilesArray[tilePos.x + 1, tilePos.y + 1].State == Tile.TileState.Hidden)
-            //TilesArray[tilePos.x + 1, tilePos.y + 1].Discover();
+            tile.SetVisualisation(colorLerpValue);
         }
+    }
+
+    public void StopPrevisualisation()
+    {
+        foreach (Tile tile in _newExpandedTiles)
+        {
+            tile.SetVisualisation(0);
+        }
+        _newExpandedTiles = new List<Tile>();
+    }
+
+    public void Expand(List<Tile> tilesToExpand, int comboAmount)
+    {
+        foreach (Tile tile in tilesToExpand)
+        {
+            int tileIndexInList = TilesList.IndexOf(tile);
+            Vector2Int tilePos = new Vector2Int(tileIndexInList % width, Mathf.FloorToInt(tileIndexInList / width));
+
+            int expandAmount = Mathf.Clamp(Mathf.FloorToInt(comboAmount / 2), 1, 9999);
+            print(expandAmount);
+            for (int i = 1; i <= expandAmount; i++)
+            {
+                //if (tilePos.x - 1 >= 0 && tilePos.y - 1 >= 0 && TilesArray[tilePos.x - 1, tilePos.y - 1].State == Tile.TileState.Hidden)
+                //TilesArray[tilePos.x - 1, tilePos.y - 1].Discover();
+                if (tilePos.y - i >= 0 && TilesArray[tilePos.x, tilePos.y - i].State == Tile.TileState.Hidden && !_newExpandedTiles.Contains(TilesArray[tilePos.x , tilePos.y - i]))
+                    _newExpandedTiles.Add(TilesArray[tilePos.x , tilePos.y - i]);
+                //if (tilePos.x + 1 <= width - 1 && tilePos.y - 1 >= 0 && TilesArray[tilePos.x + 1, tilePos.y - 1].State == Tile.TileState.Hidden)
+                //TilesArray[tilePos.x + 1, tilePos.y - 1].Discover();
+
+                if (tilePos.x - i >= 0 && TilesArray[tilePos.x - i, tilePos.y].State == Tile.TileState.Hidden && !_newExpandedTiles.Contains(TilesArray[tilePos.x - i, tilePos.y]))
+                    _newExpandedTiles.Add(TilesArray[tilePos.x - i, tilePos.y]);
+                if (tilePos.x + i <= width - 1 && TilesArray[tilePos.x + i, tilePos.y].State == Tile.TileState.Hidden && !_newExpandedTiles.Contains(TilesArray[tilePos.x + i, tilePos.y]))
+                    _newExpandedTiles.Add(TilesArray[tilePos.x + i, tilePos.y]);
+
+                //if (tilePos.x - 1 >= 0 && tilePos.y + 1 <= height - 1 && TilesArray[tilePos.x - 1, tilePos.y + 1].State == Tile.TileState.Hidden)
+                //TilesArray[tilePos.x - 1, tilePos.y + 1].Discover();
+                if (tilePos.y + i <= _height - 1 && TilesArray[tilePos.x, tilePos.y + i].State == Tile.TileState.Hidden && !_newExpandedTiles.Contains(TilesArray[tilePos.x, tilePos.y + i]))
+                    _newExpandedTiles.Add(TilesArray[tilePos.x, tilePos.y + i]);
+                //if (tilePos.x + 1 <= width - 1 && tilePos.y + 1 <= height - 1 && TilesArray[tilePos.x + 1, tilePos.y + 1].State == Tile.TileState.Hidden)
+                //TilesArray[tilePos.x + 1, tilePos.y + 1].Discover();
+            }
+        }
+    }
+
+    public void ValidateExpand()
+    {
+        foreach (Tile tile in _newExpandedTiles)
+        {
+            tile.Discover();
+            tile.SetVisualisation(0);
+        }
+        StopPrevisualisation();
     }
 }

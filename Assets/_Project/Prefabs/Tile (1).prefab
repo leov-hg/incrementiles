@@ -211,6 +211,7 @@ MonoBehaviour:
   parkModel: {fileID: 8026390470659728566}
   roadModel: {fileID: 8865638663804127601}
   spawnParticles: {fileID: 1548016509056365615}
+  previsualisationColor: {r: 0.22639717, g: 0.78699994, b: 0.19405474, a: 1}
 --- !u!1 &8865638663804127601
 GameObject:
   m_ObjectHideFlags: 0

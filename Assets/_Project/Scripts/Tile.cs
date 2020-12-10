@@ -21,11 +21,13 @@ public class Tile : MonoBehaviour
     [SerializeField] private GameObject parkModel;
     [SerializeField] private GameObject roadModel;
     [SerializeField] private GameObject spawnParticles;
+    [SerializeField] private Color previsualisationColor;
 
     private GameObject _currentDisplayedModel;
     private MeshRenderer _currentDisplayModelMesh;
-
     private MeshRenderer _tileBaseMeshRenderer;
+
+    private Color _startColor;
 
     private Tween selectionOutlineTween;
     private Tween selectionScaleXTween;
@@ -138,6 +140,11 @@ public class Tile : MonoBehaviour
         selectionScaleZTween.Kill();
     }
 
+    public void SetVisualisation(float lerpValue)
+    {
+        _tileBaseMeshRenderer.material.color = Color.Lerp(_startColor, previsualisationColor, lerpValue);
+    }
+
     public void Validate()
     {
         
@@ -167,6 +174,7 @@ public class Tile : MonoBehaviour
     public void SetColor(Color color)
     {
         _tileBaseMeshRenderer.material.color = color;
+        _startColor = color;
     }
     
     

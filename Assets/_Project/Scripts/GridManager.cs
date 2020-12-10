@@ -84,17 +84,29 @@ public class GridManager : MonoBehaviour
     }*/
 
 
-    public void Expand(Tile tileToExpand, int comboAmount)
+    public void ValidateExpand()
+    {
+        foreach (Grid grid in _grids)
+        {
+            grid.ValidateExpand();
+        }
+    }
+
+    public void StopPrevisualisation()
+    {
+        foreach (Grid grid in _grids)
+        {
+            grid.StopPrevisualisation();
+        }
+    }
+    
+    public void Expand(List<Tile> tilesToExpand, int comboAmount)
     {
         Grid localGrid = null;
 
         foreach (Grid grid in _grids)
         {
-            if (grid.Contains(tileToExpand))
-            {
-                grid.Expand(tileToExpand, comboAmount);
-            }
+            grid.Expand(tilesToExpand, comboAmount);
         }
     }
-    
 }
