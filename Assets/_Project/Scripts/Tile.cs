@@ -10,10 +10,13 @@ using HomaGames.Internal.DataBank.BasicTypes;
 using MyBox;
 using UnityEditor;
 using UnityEngine;
+using Event = HomaGames.Internal.DataBank.Event;
 using Random = UnityEngine.Random;
 
 public class Tile : MonoBehaviour
 {
+    public Action OnDiscover;
+    
     [SerializeField] private FloatData lerpValue;
     
     [SerializeField] private TileType tileType;
@@ -185,6 +188,8 @@ public class Tile : MonoBehaviour
         State = TileState.Discovered;
         transform.DORotate(new Vector3(180, 0, 0), 0.5f).OnComplete(TriggerSpawnEffect);
         _currentDisplayedModel.transform.DOScale(new Vector3(0.5f, 5, 0.5f), 0.5f).SetEase(Ease.OutElastic).SetDelay(0.25f);
+        
+        OnDiscover?.Invoke();
     }
 
     private void TriggerSpawnEffect()

@@ -4,14 +4,22 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using UnityEngine;
+using Event = HomaGames.Internal.DataBank.Event;
 
 public class Grid : MonoBehaviour
 {
+    public Event OnGridComplete;
+    
     public int width;
+    public GameObject confettis;
+    public Transform checkPoint;
+
+    private int nbDiscoveredTiles;
+    
     
     private int _height;
 
-    [SerializeField] private List<Tile> _tilesList;
+    private List<Tile> _tilesList;
     private Tile[,] _tilesArray;
 
     private List<Tile> _newExpandedTiles = new List<Tile>();
@@ -29,6 +37,16 @@ public class Grid : MonoBehaviour
         set => _tilesArray = value;
     }
 
+    public void OnTileDiscover()
+    {
+        nbDiscoveredTiles++;
+        if (nbDiscoveredTiles >= _tilesList.Count)
+        {
+            //confettis
+            OnGridComplete?.Invoke();
+        }
+    }
+
     private void Awake()
     {
         _tilesList = GetComponentsInChildren<Tile>().ToList();
@@ -43,6 +61,7 @@ public class Grid : MonoBehaviour
             for (int i = 0; i < width; i++)
             {
                 _tilesArray[i, j] = _tilesList[index];
+                _tilesList[index].OnDiscover += OnTileDiscover;
                 index++;
             }
         }

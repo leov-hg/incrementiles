@@ -2,23 +2,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using HomaGames.Internal.DataBank.BasicTypes;
 using MyBox;
 using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
     public SO_GridManager gridManagerReference;
-
+    public SO_Car car;
     public Color colorLight;
     public Color colorDark;
+    public IntData currentGridIndex;
 
     private List<Grid> _grids;
+
 
     private void Awake()
     {
         gridManagerReference.gridManager = this;
 
         _grids = GetComponentsInChildren<Grid>().ToList();
+
+        currentGridIndex.Value = 0;
     }
 
     private void Start()
@@ -39,18 +44,22 @@ public class GridManager : MonoBehaviour
                     grid.TilesList[i].SetColor(colorDark);
             }
         }
+    } 
+
+    public void NextGrid()
+    {
+        currentGridIndex.Value++;
+        car.car.MoveTo(_grids[currentGridIndex.Value].checkPoint.position);
+        RevealLineCoroutine(0);
     }
 
     public bool AreNeighbors(Tile tile1, Tile tile2)
     {
         bool res = false;
         
-        foreach (Grid grid in _grids)
+        if (_grids[currentGridIndex.Value].AreNeighbors(tile1, tile2))
         {
-            if (grid.AreNeighbors(tile1, tile2))
-            {
-                res = true;
-            }
+            res = true;
         }
 
         return res;
@@ -64,12 +73,9 @@ public class GridManager : MonoBehaviour
 
     private void RevealLineCoroutine(int lineIndex)
     {
-        foreach (Grid grid in _grids)
+        for (int i = 0; i < _grids[currentGridIndex.Value].width; i++)
         {
-            for (int i = 0; i < grid.width; i++)
-            {
-                grid.TilesArray[i,lineIndex].Discover();
-            }
+            _grids[currentGridIndex.Value].TilesArray[i,lineIndex].Discover();
         }
 
     }
@@ -86,27 +92,16 @@ public class GridManager : MonoBehaviour
 
     public void ValidateExpand()
     {
-        foreach (Grid grid in _grids)
-        {
-            grid.ValidateExpand();
-        }
+        _grids[currentGridIndex.Value].ValidateExpand();
     }
 
     public void StopPrevisualisation()
     {
-        foreach (Grid grid in _grids)
-        {
-            grid.StopPrevisualisation();
-        }
+        _grids[currentGridIndex.Value].StopPrevisualisation();
     }
     
     public void Expand(List<Tile> tilesToExpand, int comboAmount)
     {
-        Grid localGrid = null;
-
-        foreach (Grid grid in _grids)
-        {
-            grid.Expand(tilesToExpand, comboAmount);
-        }
+        _grids[currentGridIndex.Value].Expand(tilesToExpand, comboAmount);
     }
 }
