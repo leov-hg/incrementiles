@@ -260,15 +260,15 @@ PlayerSettings:
   AndroidTargetArchitectures: 3
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: '{inproject}: Assets/Resources/user.keystore'
-  AndroidKeyaliasName: lightsout
+  AndroidKeystoreName: '{inproject}: Assets/Resources/userks.keystore'
+  AndroidKeyaliasName: irlteam
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
   AndroidIsGame: 1
   AndroidEnableTango: 0
   androidEnableBanner: 1
   androidUseLowAccuracyLocation: 0
-  androidUseCustomKeystore: 0
+  androidUseCustomKeystore: 1
   m_AndroidBanners:
   - width: 320
     height: 180
@@ -454,7 +454,7 @@ PlayerSettings:
       m_Kind: 1
       m_SubKind: 
     - m_Textures:
-      - {fileID: 2800000, guid: b4803cef27f9ea6498a83b1ba9c936a3, type: 3}
+      - {fileID: 2800000, guid: b29dee7ad2ff0964e8f850974dd3fd5b, type: 3}
       - {fileID: 0}
       m_Width: 432
       m_Height: 432
