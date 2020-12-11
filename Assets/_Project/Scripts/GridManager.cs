@@ -30,12 +30,6 @@ public class GridManager : MonoBehaviour
         currentGridIndex.Value = 0;
     }
 
-    private void Start()
-    {
-        RevealLineCoroutine(0);
-        InitGridsColor();
-    }
-
     public void InitGridsColor()
     {
         foreach (Grid grid in _grids)
@@ -120,5 +114,17 @@ public class GridManager : MonoBehaviour
     public void Expand(List<Tile> tilesToExpand, int comboAmount)
     {
         _grids[currentGridIndex.Value].Expand(tilesToExpand, comboAmount);
+    }
+
+    public void Reset()
+    {
+        currentGridIndex.Value = 0;
+        foreach (Grid grid in _grids)
+        {
+            grid.Reset();
+        }
+        RevealLineCoroutine(0);
+        InitGridsColor();
+        car.car.transform.position = _grids[currentGridIndex.Value].checkPoint.position;
     }
 }

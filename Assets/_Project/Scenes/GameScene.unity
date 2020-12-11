@@ -3600,8 +3600,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_Weight0: 0
-  m_Weight1: 1
+  m_Weight0: 0.03302968
+  m_Weight1: 0.9669703
   m_Weight2: 0.5
   m_Weight3: 0.5
   m_Weight4: 0.5
@@ -9763,7 +9763,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 7.933941
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -9786,8 +9786,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1615876200}
-  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: -0.01, y: 11.35, z: -1.43}
+  m_LocalRotation: {x: 0.49102527, y: -0.008682657, z: 0.0048943497, w: 0.8710884}
+  m_LocalPosition: {x: 0.043508075, y: 11.052733, z: -1.4557631}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

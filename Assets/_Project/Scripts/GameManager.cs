@@ -59,6 +59,8 @@ public class GameManager : MonoBehaviour
             _levels[rdm].gameObject.SetActive(true);
             _currentLevel = _levels[rdm];
         }
+        
+        _currentLevel.Reset();
     }
     
     

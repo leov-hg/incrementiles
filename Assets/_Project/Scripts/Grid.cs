@@ -81,8 +81,6 @@ public class Grid : MonoBehaviour
 
     private void Awake()
     {
-        confettis.SetActive(false);
-        
         _tilesList = GetComponentsInChildren<Tile>().ToList();
         
         _height = _tilesList.Count / width;
@@ -211,5 +209,16 @@ public class Grid : MonoBehaviour
         
         StopPrevisualisation();
         MoveCarToFurthestRoad();
+    }
+
+    public void Reset()
+    {
+        confettis.SetActive(false);
+        foreach (Tile tile in _tilesList)
+        {
+            tile.Hide();
+        }
+        
+        nbDiscoveredTiles = 0;
     }
 }
