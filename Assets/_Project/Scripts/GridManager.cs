@@ -23,8 +23,6 @@ public class GridManager : MonoBehaviour
 
     private void Awake()
     {
-        gridManagerReference.gridManager = this;
-
         _grids = GetComponentsInChildren<Grid>().ToList();
 
         currentGridIndex.Value = 0;
@@ -118,6 +116,8 @@ public class GridManager : MonoBehaviour
 
     public void Reset()
     {
+        gridManagerReference.gridManager = this;
+        
         currentGridIndex.Value = 0;
         foreach (Grid grid in _grids)
         {
