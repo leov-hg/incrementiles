@@ -9,7 +9,8 @@ using Event = HomaGames.Internal.DataBank.Event;
 public class Grid : MonoBehaviour
 {
     public Event OnGridComplete;
-    
+
+    public SO_Car carRef;
     public int width;
     public GameObject confettis;
     public Transform checkPoint;
@@ -24,6 +25,7 @@ public class Grid : MonoBehaviour
 
     private List<Tile> _newExpandedTiles = new List<Tile>();
     private float colorLerpValue;
+    [SerializeField] private List<Tile> _roadTiles = new List<Tile>();
 
     public List<Tile> TilesList
     {
@@ -47,6 +49,21 @@ public class Grid : MonoBehaviour
         }
     }
 
+    private List<Tile> GetAllRoadTiles()
+    {
+        List<Tile> res = new List<Tile>();
+        
+        foreach (Tile tile in _tilesList)
+        {
+            if (tile.Type == Tile.TileType.Road)
+            {
+                res.Add(tile);
+            }
+        }
+
+        return res;
+    }
+
     private void Awake()
     {
         confettis.SetActive(false);
@@ -67,6 +84,22 @@ public class Grid : MonoBehaviour
                 index++;
             }
         }
+
+        _roadTiles = GetAllRoadTiles();
+    }
+
+    public void MoveCarToFurthestRoad()
+    {
+
+        int i = 0;
+        while (_roadTiles[i].State == Tile.TileState.Discovered)
+        {
+            i++;
+            if (i == _roadTiles.Count)
+                break;
+        }
+        
+        carRef.car.MoveTo(_roadTiles[i - 1].transform.position);
     }
 
 
@@ -153,6 +186,8 @@ public class Grid : MonoBehaviour
         {
             tile.Discover();
         }
+        
         StopPrevisualisation();
+        MoveCarToFurthestRoad();
     }
 }

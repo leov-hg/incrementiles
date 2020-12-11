@@ -48,9 +48,16 @@ public class GridManager : MonoBehaviour
 
     public void NextGrid()
     {
-        currentGridIndex.Value++;
-        car.car.MoveTo(_grids[currentGridIndex.Value].checkPoint.position);
-        RevealLineCoroutine(0);
+        if (currentGridIndex.Value < _grids.Count - 1)
+        {
+            currentGridIndex.Value++;
+            car.car.MoveTo(_grids[currentGridIndex.Value].checkPoint.position);
+            RevealLineCoroutine(0);
+        }
+        else
+        {
+            //todo : fin du niveau
+        }
     }
 
     public bool AreNeighbors(Tile tile1, Tile tile2)

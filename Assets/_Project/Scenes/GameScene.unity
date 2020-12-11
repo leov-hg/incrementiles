@@ -3599,9 +3599,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnGridComplete: {fileID: 11400000, guid: 59d2b1e3c809329489b5e4e0354c54e7, type: 2}
+  carRef: {fileID: 0}
   width: 7
   confettis: {fileID: 921655117}
   checkPoint: {fileID: 1543981654}
+  _roadTiles: []
 --- !u!4 &713172257
 Transform:
   m_ObjectHideFlags: 0
@@ -3906,9 +3908,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnGridComplete: {fileID: 11400000, guid: 59d2b1e3c809329489b5e4e0354c54e7, type: 2}
+  carRef: {fileID: 11400000, guid: f79a0b6386b44334cbd75e9df47b2025, type: 2}
   width: 7
   confettis: {fileID: 1742895395}
   checkPoint: {fileID: 1749876303}
+  _roadTiles: []
 --- !u!1001 &825258962
 PrefabInstance:
   m_ObjectHideFlags: 0
