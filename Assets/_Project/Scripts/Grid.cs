@@ -43,7 +43,7 @@ public class Grid : MonoBehaviour
     public void OnTileDiscover()
     {
         nbDiscoveredTiles++;
-        if (nbDiscoveredTiles >= _tilesList.Count)
+        if (nbDiscoveredTiles == _tilesList.Count)
         {
             confettis.SetActive(true);
             
@@ -112,7 +112,6 @@ public class Grid : MonoBehaviour
                 break;
         }
         
-        print(i);
         carRef.car.MoveTo(_roadTiles[i - 1].transform.position);
     }
 
