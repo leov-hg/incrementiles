@@ -30,7 +30,7 @@ public class Tile : MonoBehaviour
     [SerializeField] private GameObject houseModel;
     [SerializeField] private GameObject parkModel;
     [SerializeField] private GameObject roadModel;
-    [SerializeField] private GameObject spawnParticles;
+    public GameObject spawnParticles;
     [SerializeField] private Color previsualisationColor;
 
     private GameObject _currentDisplayedModel;
@@ -180,6 +180,14 @@ public class Tile : MonoBehaviour
     {
         State = TileState.Hidden;
         transform.DORotate(new Vector3(0, 0, 0), 0.5f);
+        
+        buildingModel.transform.localScale = Vector3.zero;
+        houseModel.transform.localScale = Vector3.zero;
+        parkModel.transform.localScale = Vector3.zero;
+        roadModel.transform.localScale = Vector3.zero;
+
+        if (Type != TileType.Road)
+            _currentDisplayModelMesh.material.DOColor(Color.white, 0f);
     }
 
     [ButtonMethod]

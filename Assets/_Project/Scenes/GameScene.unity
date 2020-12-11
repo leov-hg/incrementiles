@@ -3600,8 +3600,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_Weight0: 0.03302968
-  m_Weight1: 0.9669703
+  m_Weight0: 0
+  m_Weight1: 1
   m_Weight2: 0.5
   m_Weight3: 0.5
   m_Weight4: 0.5
@@ -7528,6 +7528,75 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1111499423}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1112541061
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 479080633416662419, guid: a84af0f3d6ca24a2d96996d65a283eef,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 479080633416662419, guid: a84af0f3d6ca24a2d96996d65a283eef,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 479080633416662419, guid: a84af0f3d6ca24a2d96996d65a283eef,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 479080633416662419, guid: a84af0f3d6ca24a2d96996d65a283eef,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 479080633416662419, guid: a84af0f3d6ca24a2d96996d65a283eef,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 479080633416662419, guid: a84af0f3d6ca24a2d96996d65a283eef,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 479080633416662419, guid: a84af0f3d6ca24a2d96996d65a283eef,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 479080633416662419, guid: a84af0f3d6ca24a2d96996d65a283eef,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 479080633416662419, guid: a84af0f3d6ca24a2d96996d65a283eef,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 479080633416662419, guid: a84af0f3d6ca24a2d96996d65a283eef,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 479080633416662419, guid: a84af0f3d6ca24a2d96996d65a283eef,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 479080633416662421, guid: a84af0f3d6ca24a2d96996d65a283eef,
+        type: 3}
+      propertyPath: m_Name
+      value: Homa Belly
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a84af0f3d6ca24a2d96996d65a283eef, type: 3}
 --- !u!1001 &1124783960
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9763,7 +9832,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7.933941
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -9786,8 +9855,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1615876200}
-  m_LocalRotation: {x: 0.49102527, y: -0.008682657, z: 0.0048943497, w: 0.8710884}
-  m_LocalPosition: {x: 0.043508075, y: 11.052733, z: -1.4557631}
+  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
+  m_LocalPosition: {x: -0.01, y: 11.35, z: -1.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

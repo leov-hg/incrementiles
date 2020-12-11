@@ -217,6 +217,7 @@ public class Grid : MonoBehaviour
         foreach (Tile tile in _tilesList)
         {
             tile.Hide();
+            tile.spawnParticles.SetActive(false);
         }
         
         nbDiscoveredTiles = 0;
