@@ -7011,7 +7011,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.74963397, y: 1}
+    m_SensorSize: {x: 0.8, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -8500,8 +8500,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_Weight0: 1
-  m_Weight1: 0
+  m_Weight0: 0
+  m_Weight1: 1
   m_Weight2: 0.5
   m_Weight3: 0.5
   m_Weight4: 0.5
@@ -13398,17 +13398,22 @@ PrefabInstance:
     - target: {fileID: 2036359914235275053, guid: ebfa4df364dc78047a63c4d29dc00284,
         type: 3}
       propertyPath: tileType
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8026390470659728566, guid: ebfa4df364dc78047a63c4d29dc00284,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8026390470805374627, guid: ebfa4df364dc78047a63c4d29dc00284,
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8026390471147715189, guid: ebfa4df364dc78047a63c4d29dc00284,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebfa4df364dc78047a63c4d29dc00284, type: 3}
@@ -25666,7 +25671,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.74963397, y: 1}
+    m_SensorSize: {x: 0.8, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -28245,7 +28250,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -28268,8 +28273,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1615876200}
-  m_LocalRotation: {x: 0.20055385, y: -0.29057807, z: 0.062427174, w: 0.9335124}
-  m_LocalPosition: {x: 1.61, y: 2.35, z: -2.21}
+  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -32162,7 +32167,7 @@ PrefabInstance:
     - target: {fileID: 2036359914235275053, guid: ebfa4df364dc78047a63c4d29dc00284,
         type: 3}
       propertyPath: tileType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8026390470659728566, guid: ebfa4df364dc78047a63c4d29dc00284,
         type: 3}
@@ -32172,12 +32177,12 @@ PrefabInstance:
     - target: {fileID: 8026390470805374627, guid: ebfa4df364dc78047a63c4d29dc00284,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8026390471147715189, guid: ebfa4df364dc78047a63c4d29dc00284,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebfa4df364dc78047a63c4d29dc00284, type: 3}
