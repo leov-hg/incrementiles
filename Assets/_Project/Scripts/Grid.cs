@@ -14,6 +14,7 @@ public class Grid : MonoBehaviour
     public int width;
     public GameObject confettis;
     public Transform checkPoint;
+    public Color grayOutColor;
 
     private int nbDiscoveredTiles;
     
@@ -45,6 +46,20 @@ public class Grid : MonoBehaviour
         if (nbDiscoveredTiles >= _tilesList.Count)
         {
             confettis.SetActive(true);
+            
+            //Gray out all tile and State = hidden
+            foreach (Tile tile in _tilesList)
+            {
+                if (tile.Type != Tile.TileType.Road)
+                {
+                    tile.State = Tile.TileState.Hidden;
+                    tile._currentDisplayModelMesh.material.DOColor(grayOutColor, 0.1f);
+                }
+
+                tile._tileBaseMeshRenderer.material.DOColor(grayOutColor, 0.1f);
+            }
+            
+            
             OnGridComplete?.Invoke();
         }
     }
@@ -148,8 +163,12 @@ public class Grid : MonoBehaviour
 
     public void Expand(List<Tile> tilesToExpand, int comboAmount)
     {
+        _newExpandedTiles = new  List<Tile>();
         foreach (Tile tile in tilesToExpand)
         {
+            if (!_tilesList.Contains(tile)) return;
+            
+            
             int tileIndexInList = TilesList.IndexOf(tile);
             Vector2Int tilePos = new Vector2Int(tileIndexInList % width, Mathf.FloorToInt(tileIndexInList / width));
 
@@ -159,19 +178,19 @@ public class Grid : MonoBehaviour
             {
                 //if (tilePos.x - 1 >= 0 && tilePos.y - 1 >= 0 && TilesArray[tilePos.x - 1, tilePos.y - 1].State == Tile.TileState.Hidden)
                 //TilesArray[tilePos.x - 1, tilePos.y - 1].Discover();
-                if (tilePos.y - i >= 0 && TilesArray[tilePos.x, tilePos.y - i].State == Tile.TileState.Hidden && !_newExpandedTiles.Contains(TilesArray[tilePos.x , tilePos.y - i]))
+                if (tilePos.y - i >= 0 && !_newExpandedTiles.Contains(TilesArray[tilePos.x , tilePos.y - i]))
                     _newExpandedTiles.Add(TilesArray[tilePos.x , tilePos.y - i]);
                 //if (tilePos.x + 1 <= width - 1 && tilePos.y - 1 >= 0 && TilesArray[tilePos.x + 1, tilePos.y - 1].State == Tile.TileState.Hidden)
                 //TilesArray[tilePos.x + 1, tilePos.y - 1].Discover();
 
-                if (tilePos.x - i >= 0 && TilesArray[tilePos.x - i, tilePos.y].State == Tile.TileState.Hidden && !_newExpandedTiles.Contains(TilesArray[tilePos.x - i, tilePos.y]))
+                if (tilePos.x - i >= 0 && !_newExpandedTiles.Contains(TilesArray[tilePos.x - i, tilePos.y]))
                     _newExpandedTiles.Add(TilesArray[tilePos.x - i, tilePos.y]);
-                if (tilePos.x + i <= width - 1 && TilesArray[tilePos.x + i, tilePos.y].State == Tile.TileState.Hidden && !_newExpandedTiles.Contains(TilesArray[tilePos.x + i, tilePos.y]))
+                if (tilePos.x + i <= width - 1 && !_newExpandedTiles.Contains(TilesArray[tilePos.x + i, tilePos.y]))
                     _newExpandedTiles.Add(TilesArray[tilePos.x + i, tilePos.y]);
 
                 //if (tilePos.x - 1 >= 0 && tilePos.y + 1 <= height - 1 && TilesArray[tilePos.x - 1, tilePos.y + 1].State == Tile.TileState.Hidden)
                 //TilesArray[tilePos.x - 1, tilePos.y + 1].Discover();
-                if (tilePos.y + i <= _height - 1 && TilesArray[tilePos.x, tilePos.y + i].State == Tile.TileState.Hidden && !_newExpandedTiles.Contains(TilesArray[tilePos.x, tilePos.y + i]))
+                if (tilePos.y + i <= _height - 1 && !_newExpandedTiles.Contains(TilesArray[tilePos.x, tilePos.y + i]))
                     _newExpandedTiles.Add(TilesArray[tilePos.x, tilePos.y + i]);
                 //if (tilePos.x + 1 <= width - 1 && tilePos.y + 1 <= height - 1 && TilesArray[tilePos.x + 1, tilePos.y + 1].State == Tile.TileState.Hidden)
                 //TilesArray[tilePos.x + 1, tilePos.y + 1].Discover();
@@ -184,7 +203,10 @@ public class Grid : MonoBehaviour
     {
         foreach (Tile tile in _newExpandedTiles)
         {
-            tile.Discover();
+            if (tile.State == Tile.TileState.Hidden)
+            {
+                tile.Discover();
+            }
         }
         
         StopPrevisualisation();

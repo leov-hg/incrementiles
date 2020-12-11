@@ -57,7 +57,6 @@ public class MatchingController : MonoBehaviour
 
         if (Input.GetMouseButton(0) && _startTile != null)
         {
-            Debug.DrawRay(_mainCamera.transform.position, _mainCamera.ScreenPointToRay(Input.mousePosition).direction * 100);
             if (Physics.Raycast(_mainCamera.ScreenPointToRay(Input.mousePosition), out _raycastHit, Mathf.Infinity, tileLayer))
             {
                 Tile hitTile = _raycastHit.transform.GetComponent<Tile>();

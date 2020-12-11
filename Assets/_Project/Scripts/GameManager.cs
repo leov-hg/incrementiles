@@ -13,10 +13,14 @@ public class GameManager : MonoBehaviour
     public GameObject gameCanvas;
     public GameObject winCanvas;
 
+    private GridManager _currentLevel;
+
     [SerializeField]private List<GridManager> _levels;
 
     private void Awake()
     {
+        Application.targetFrameRate = 60;
+        
         menuCanvas.SetActive(false);
         gameCanvas.SetActive(false);
         winCanvas.SetActive(false);
@@ -47,10 +51,13 @@ public class GameManager : MonoBehaviour
         if (levelId <= _levels.Count - 1)
         {
             _levels[levelId].gameObject.SetActive(true);
+            _currentLevel = _levels[levelId];
         }
         else
         {
-            _levels[Random.Range(0, _levels.Count)].gameObject.SetActive(true);
+            int rdm = Random.Range(0, _levels.Count);
+            _levels[rdm].gameObject.SetActive(true);
+            _currentLevel = _levels[rdm];
         }
     }
     
@@ -82,10 +89,9 @@ public class GameManager : MonoBehaviour
     public void OnWinExit()
     {
         winCanvas.SetActive(false);
-
-        int LevelId = PlayerPrefs.GetInt("LevelId", 0);
-        _levels[LevelId].gameObject.SetActive(false);
-        PlayerPrefs.SetInt("LevelId", LevelId + 1);
+        
+        _currentLevel.gameObject.SetActive(false);
+        PlayerPrefs.SetInt("LevelId", PlayerPrefs.GetInt("LevelId", 0) + 1);
     }
 
     public void OnFailEnter()

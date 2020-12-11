@@ -5174,6 +5174,7 @@ MonoBehaviour:
   width: 7
   confettis: {fileID: 921655117}
   checkPoint: {fileID: 1543981654}
+  grayOutColor: {r: 0, g: 0, b: 0, a: 0}
   _roadTiles: []
 --- !u!4 &713172257
 Transform:
@@ -5772,6 +5773,7 @@ MonoBehaviour:
   width: 7
   confettis: {fileID: 1742895395}
   checkPoint: {fileID: 1749876303}
+  grayOutColor: {r: 0.49056602, g: 0.488252, b: 0.488252, a: 1}
   _roadTiles: []
 --- !u!1001 &805085004
 PrefabInstance:
@@ -10206,6 +10208,7 @@ MonoBehaviour:
   width: 7
   confettis: {fileID: 488079475}
   checkPoint: {fileID: 98612922}
+  grayOutColor: {r: 0.49056602, g: 0.488252, b: 0.488252, a: 1}
   _roadTiles: []
 --- !u!1001 &1734432668
 PrefabInstance:

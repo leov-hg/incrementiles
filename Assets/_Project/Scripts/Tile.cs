@@ -34,8 +34,8 @@ public class Tile : MonoBehaviour
     [SerializeField] private Color previsualisationColor;
 
     private GameObject _currentDisplayedModel;
-    private MeshRenderer _currentDisplayModelMesh;
-    private MeshRenderer _tileBaseMeshRenderer;
+    public MeshRenderer _currentDisplayModelMesh;
+    public MeshRenderer _tileBaseMeshRenderer;
 
     private Color _startColor;
 

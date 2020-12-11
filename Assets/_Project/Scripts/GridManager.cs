@@ -60,8 +60,14 @@ public class GridManager : MonoBehaviour
         }
         else
         {
-            stateMachine.StartTransition(winState);
+            StartCoroutine(SpawnEndScreenIn(2));
         }
+    }
+
+    private IEnumerator SpawnEndScreenIn(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        stateMachine.StartTransition(winState);
     }
 
     public bool AreNeighbors(Tile tile1, Tile tile2)
