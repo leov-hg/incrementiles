@@ -127,4 +127,9 @@ public class GridManager : MonoBehaviour
         InitGridsColor();
         car.car.transform.position = _grids[currentGridIndex.Value].checkPoint.position;
     }
+
+    public Grid GetCurrentGrid()
+    {
+        return _grids[currentGridIndex.Value];
+    }
 }
