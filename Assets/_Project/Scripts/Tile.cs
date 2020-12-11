@@ -226,4 +226,28 @@ public class Tile : MonoBehaviour
         Hidden,
         Discovered
     }
+
+    private void OnValidate()
+    {
+        buildingModel.SetActive(false);
+        houseModel.SetActive(false);
+        parkModel.SetActive(false);
+        roadModel.SetActive(false);
+        
+        switch (Type)
+        {
+            case TileType.Building :
+                buildingModel.SetActive(true);
+                break;
+            case TileType.House :
+                houseModel.SetActive(true);
+                break;
+            case TileType.Park : 
+                parkModel.SetActive(true);
+                break;
+            case TileType.Road :
+                roadModel.SetActive(true);
+                break;
+        }
+    }
 }

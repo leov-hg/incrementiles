@@ -112,6 +112,7 @@ public class Grid : MonoBehaviour
                 break;
         }
         
+        print(i);
         carRef.car.MoveTo(_roadTiles[i - 1].transform.position);
     }
 

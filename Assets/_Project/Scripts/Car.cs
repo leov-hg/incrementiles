@@ -9,6 +9,8 @@ public class Car : MonoBehaviour
     public float timeTotravel;
     public SO_Car carRef;
 
+    private Tween _moveTween;
+
     private void Awake()
     {
         carRef.car = this;
@@ -17,7 +19,8 @@ public class Car : MonoBehaviour
 
     public void MoveTo(Vector3 pos)
     {
-        transform.DOMove(pos, timeTotravel);
+        _moveTween.Kill();
+        _moveTween = transform.DOMove(pos, timeTotravel);
     }
     void Update()
     {

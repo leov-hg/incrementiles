@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using HomaGames.HomaBelly;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -34,6 +35,8 @@ public class GameManager : MonoBehaviour
 
     public void OnMenuEnter()
     {
+        HomaBelly.Instance.TrackProgressionEvent(ProgressionStatus.Start, "Level", PlayerPrefs.GetInt("LevelId", 0));
+        
         CameraController.Instance.SetCamera(0);
         menuCanvas.SetActive(true);
         SpawnLevel();
@@ -84,6 +87,7 @@ public class GameManager : MonoBehaviour
 
     public void OnWinEnter()
     {
+        HomaBelly.Instance.TrackProgressionEvent(ProgressionStatus.Complete, "Level", PlayerPrefs.GetInt("LevelId", 0));
         CameraController.Instance.SetCamera(2);
         winCanvas.SetActive(true);
     }

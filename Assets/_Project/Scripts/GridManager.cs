@@ -49,8 +49,8 @@ public class GridManager : MonoBehaviour
         if (currentGridIndex.Value < _grids.Count - 1)
         {
             currentGridIndex.Value++;
-            car.car.MoveTo(_grids[currentGridIndex.Value].checkPoint.position);
             RevealLineCoroutine(0);
+            car.car.MoveTo(_grids[currentGridIndex.Value].checkPoint.position);
         }
         else
         {

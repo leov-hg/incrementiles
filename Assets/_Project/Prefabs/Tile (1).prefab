@@ -215,7 +215,9 @@ MonoBehaviour:
   parkModel: {fileID: 8026390470659728566}
   roadModel: {fileID: 8865638663804127601}
   spawnParticles: {fileID: 1548016509056365615}
-  previsualisationColor: {r: 0.22639717, g: 0.78699994, b: 0.19405474, a: 1}
+  previsualisationColor: {r: 0.21064678, g: 0.73, b: 0.1779602, a: 1}
+  _currentDisplayModelMesh: {fileID: 0}
+  _tileBaseMeshRenderer: {fileID: 0}
 --- !u!1 &8865638663804127601
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,17 +510,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: d930a6cbb7e9ed84ba34661ace2ff657,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: d930a6cbb7e9ed84ba34661ace2ff657,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: d930a6cbb7e9ed84ba34661ace2ff657,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: d930a6cbb7e9ed84ba34661ace2ff657,
         type: 3}
@@ -538,7 +540,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: d930a6cbb7e9ed84ba34661ace2ff657,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: d930a6cbb7e9ed84ba34661ace2ff657,
         type: 3}
@@ -624,17 +626,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 9684bb99a7ba8934a907c014ee424d48,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 9684bb99a7ba8934a907c014ee424d48,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 9684bb99a7ba8934a907c014ee424d48,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 9684bb99a7ba8934a907c014ee424d48,
         type: 3}
@@ -740,17 +742,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 0b59f09be496c1942929cc48895d818f,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 0b59f09be496c1942929cc48895d818f,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 0b59f09be496c1942929cc48895d818f,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 0b59f09be496c1942929cc48895d818f,
         type: 3}
