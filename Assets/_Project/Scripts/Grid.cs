@@ -42,13 +42,15 @@ public class Grid : MonoBehaviour
         nbDiscoveredTiles++;
         if (nbDiscoveredTiles >= _tilesList.Count)
         {
-            //confettis
+            confettis.SetActive(true);
             OnGridComplete?.Invoke();
         }
     }
 
     private void Awake()
     {
+        confettis.SetActive(false);
+        
         _tilesList = GetComponentsInChildren<Tile>().ToList();
         
         _height = _tilesList.Count / width;
