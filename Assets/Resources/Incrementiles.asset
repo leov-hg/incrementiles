@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a261e0737a035741a5fed94fd70086c, type: 3}
+  m_Name: Incrementiles
+  m_EditorClassIdentifier: 
+  _stateTransitions:
+  - startState: {fileID: 11400000, guid: d72708b389ecc8b44a85a38ea1da418d, type: 2}
+    endState: {fileID: 11400000, guid: 4dcc36d10a613b54990bd216822d921d, type: 2}
+    transitionMode: 1
+    transitionConditions: []
+  - startState: {fileID: 11400000, guid: 4dcc36d10a613b54990bd216822d921d, type: 2}
+    endState: {fileID: 11400000, guid: 620e6ca137b665e478fac6f66851f43f, type: 2}
+    transitionMode: 1
+    transitionConditions: []
+  - startState: {fileID: 11400000, guid: 4dcc36d10a613b54990bd216822d921d, type: 2}
+    endState: {fileID: 11400000, guid: cd727f72355285648b48611fbc6a8585, type: 2}
+    transitionMode: 1
+    transitionConditions: []
+  - startState: {fileID: 11400000, guid: 620e6ca137b665e478fac6f66851f43f, type: 2}
+    endState: {fileID: 11400000, guid: d72708b389ecc8b44a85a38ea1da418d, type: 2}
+    transitionMode: 1
+    transitionConditions: []
+  - startState: {fileID: 11400000, guid: cd727f72355285648b48611fbc6a8585, type: 2}
+    endState: {fileID: 11400000, guid: d72708b389ecc8b44a85a38ea1da418d, type: 2}
+    transitionMode: 1
+    transitionConditions: []
+  _startingState: {fileID: 11400000, guid: d72708b389ecc8b44a85a38ea1da418d, type: 2}
+  references:
+    version: 1

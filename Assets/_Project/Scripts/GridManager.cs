@@ -3,11 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using HomaGames.Internal.DataBank.BasicTypes;
+using HomaGames.Internal.GameState;
 using MyBox;
 using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
+    public StateMachineDescription stateMachine;
+    public State winState;
+    
     public SO_GridManager gridManagerReference;
     public SO_Car car;
     public Color colorLight;
@@ -56,7 +60,7 @@ public class GridManager : MonoBehaviour
         }
         else
         {
-            //todo : fin du niveau
+            stateMachine.StartTransition(winState);
         }
     }
 
